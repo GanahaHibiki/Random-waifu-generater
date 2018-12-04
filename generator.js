@@ -123,9 +123,13 @@ function getCurrentWife() {
     return wife;
 }
 function insertExWife() {
-    if (wifeCounter++) {
+    if(wifeCounter) {
         let exWife = getCurrentWife();
         insertExWifeToTable(exWife);
+    }
+    else {
+        wifeCounter++;
+        updateCounterText();
     }
 }
 function insertExWifeToTable(exWife) {
@@ -181,6 +185,8 @@ function retriveWives() {
     let currWife = JSON.parse(storage.getItem("currWife"));
     if (currWife) {
         setCurrWife(currWife);
+        wifeCounter++;
+        updateCounterText();
     }
 }
 function setCurrWife(currWife) {
@@ -214,4 +220,5 @@ function killAllWives() {
         wifeTable.rows[i].cells[1].removeAttribute("style");
     }
     wifeCounter = 0;
+    updateCounterText();
 }
